@@ -76,7 +76,7 @@ const SignupForm = ({className}: SignupFormClassOptions) => {
                     <input type="submit" value="Sign-Up" className='text-gray-400 text-lg'/>
                 </div>
                 <div className='px-4'>
-                    <h1 className='text-gray-400 '>Already have an account? <span className='text-green-700 hover:text-green-600 hover:cursor-pointer' onClick={redirectToLogin}>log-in</span></h1>
+                    <h1 className='text-gray-400 '>Already have an account? <span className='text-green-700 hover:text-green-600 hover:cursor-pointer' onClick={redirectToLogin}>Sign in</span></h1>
                 </div>
             </form>
         </div>

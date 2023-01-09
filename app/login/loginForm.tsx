@@ -45,7 +45,7 @@ const LoginForm = ({className}: LoginFormClassOptions) => {
                     <input type="submit" value="Login" className='text-gray-400 text-lg'/>
                 </div>
                 <div className='px-4'>
-                    <h1 className='text-gray-400 '>Doesn't have an account? <span className='text-green-700 hover:text-green-600 hover:cursor-pointer' onClick={redirectToSignup}>sign-up</span></h1>
+                    <h1 className='text-gray-400 '>Doesn't have an account? <span className='text-green-700 hover:text-green-600 hover:cursor-pointer' onClick={redirectToSignup}>sign-up!</span></h1>
                 </div>
             </form>
         </div>
