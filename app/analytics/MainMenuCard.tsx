@@ -1,19 +1,28 @@
+'use client'
+
 import React from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { BsCameraReels } from 'react-icons/bs';
+import { useRouter } from 'next/navigation';
 
 interface MainMenuCardProps {
     title: string;
     description: string;
     icon: string;
+    redirectPath: string;
     className?: string;
 }
 
-const MainMenuCard = ({title,description,icon,className}:MainMenuCardProps) => {
+const MainMenuCard = ({title,description,icon,redirectPath,className}:MainMenuCardProps) => {
+    const router = useRouter();
+
+    const redirectTo = () => router.push(`${redirectPath}`);
+
     return (
         <>
             {/* Card */}
-            <div className={`border rounded-lg border-green-700 shadow-md shadow-green-700/50 space-y-4 py-6 group ${className}`}>
+            <div className={`border rounded-lg border-green-700 shadow-md shadow-green-700/50 space-y-4 py-6 group ${className}`}
+                 onClick={redirectTo}>
                 {/* Icon and Title */}
                 <div className='flex flex-col items-center justify-between'>
                     <img  className="h-14 w-14 rounded-md hover:cursor-pointer" src={`${icon}`} />
