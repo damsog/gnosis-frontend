@@ -1,3 +1,4 @@
+import MainMenu from './MainMenu'
 import TopBar from './topBar'
 
 export default function RootLayout({
@@ -8,8 +9,10 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <TopBar />
-        {children}
+        <div>
+          <TopBar />
+          {children}
+        </div>
       </body>
     </html>
   )
