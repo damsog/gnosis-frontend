@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import LoginCard from "./loginCard";
+import LoginForm from "./loginForm";
 
 const LoginPage: NextPage = () => {
     return (
@@ -11,7 +11,7 @@ const LoginPage: NextPage = () => {
         </div>
         <div className="absolute w-screen h-screen top-0 left-0 flex flex-col items-center justify-between">
             <div></div>
-            <LoginCard className=""/>
+            <LoginForm/>
             <div></div>
         </div>
         </>
