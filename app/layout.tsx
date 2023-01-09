@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <html>
       <head />
-      <body>{children}</body>
+      <body className=" bg-[url('/cool-background2.png')] ">{children}</body>
     </html>
   )
 }
