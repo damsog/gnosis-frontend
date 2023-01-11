@@ -3,7 +3,7 @@ import MainMenuCard from './MainMenuCard';
 
 const MainMenu = () => {
     return (
-        <div className='bg-[#221c28] p-5 opacity-95 rounded-lg my-[2vh] mx-[2vw] md:mx-[8vw] lg:mx-[15vw]'>
+        <>
             {/* Cards */}
             <div className=' space-y-4 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-4'>
                 <MainMenuCard 
@@ -51,7 +51,7 @@ const MainMenu = () => {
                     className='bg-[#2b2532] hover:bg-[#302a36]'
                 />
             </div>
-        </div>
+        </>
     );
 };
 
