@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 
-const GroupsPage: NextPage = () => {
+const GroupsPage = () => {
     return (
         <div>
             <h1 className=' text-blue-600 '>Groups view</h1>

@@ -1,7 +1,6 @@
-import { NextPage } from "next";
 import LoginForm from "./loginForm";
 
-const LoginPage: NextPage = () => {
+const LoginPage = () => {
     return (
         <>
         <div className="h-screen w-auto flex items-center justify-center">

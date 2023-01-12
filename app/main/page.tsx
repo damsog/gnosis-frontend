@@ -1,7 +1,6 @@
-import type { NextPage } from 'next'
 import MainMenu from './MainMenu';
 
-const AnalyticsPage: NextPage = () => {
+const AnalyticsPage = () => {
     return (
             <MainMenu />
     );
