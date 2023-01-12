@@ -6,6 +6,9 @@ const FaceDetectionPage: NextPage = () => {
     return (
         <>
             <div className='flex flex-col'>
+                    <div className='flex justify-center'>
+                        <h5 className='text-gray-300 text-lg'>Face Detection <span className='rounded-md p-1 bg-green-700 font-light'>Live</span></h5>
+                    </div>
                 <div className='mx-1'>
                         <button className='bg-[#2b2532] text-gray-400 hover:bg-[#3f3847] hover:text-gray-200 active:bg-green-700 border 
                                     border-green-700 shadow-lg shadow-green-700/50 rounded-lg px-4 py-2'>Live</button>
