@@ -1,6 +1,11 @@
-    'use client';
+'use client';
+
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { AiFillGithub } from 'react-icons/ai';
+
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useEffect } from 'react';
 
 interface LoginFormClassOptions {
     className?: string
@@ -12,8 +17,14 @@ interface LoginFormOptions {
 }
 
 const LoginForm = ({className}: LoginFormClassOptions) => {
+    const { data: session, status } = useSession();
     const { register, handleSubmit, watch, formState: { errors } } = useForm<LoginFormOptions>();
     const router = useRouter();
+
+    useEffect(() => {
+        if(status === "loading") return;
+        if(session) router.push("/main");
+    }, [session, status]);
 
     const onSubmit: SubmitHandler<LoginFormOptions> = data => console.log(data);
     const redirectToSignup = () => router.push('/signup');
@@ -44,8 +55,14 @@ const LoginForm = ({className}: LoginFormClassOptions) => {
                                  active:translate-y-1'>
                     <input type="submit" value="Login" className='text-gray-400 text-lg'/>
                 </div>
-                <div className='px-4'>
-                    <h1 className='text-gray-400 '>Doesn't have an account? <span className='text-green-700 hover:text-green-600 hover:cursor-pointer' onClick={redirectToSignup}>sign-up!</span></h1>
+                <div className='px-4 flex flex-col items-center justify-center'>
+                    <h5 className='text-gray-400'>Or Sign In using</h5>
+                    <div className='my-2 flex'>
+                        <h5 className=" text-4xl cursor-pointer text-gray-300 hover:text-green-700" onClick={() => signIn()}><AiFillGithub/></h5>
+                    </div>
+                </div>
+                <div className='px-4 my-2'>
+                    <h1 className='text-gray-400 '>Don't have an account? <span className='text-green-700 hover:text-green-600 hover:cursor-pointer' onClick={redirectToSignup}>sign-up!</span></h1>
                 </div>
             </form>
         </div>

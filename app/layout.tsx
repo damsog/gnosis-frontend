@@ -1,3 +1,6 @@
+'use client'
+
+import { SessionProvider } from 'next-auth/react'
 import '../styles/globals.css'
 
 export default function RootLayout({
@@ -8,7 +11,11 @@ export default function RootLayout({
   return (
     <html>
       <head />
-      <body className=" bg-[url('/cool-background2.png')] ">{children}</body>
+        <body className=" bg-[url('/cool-background2.png')] ">
+          <SessionProvider refetchOnWindowFocus={false}>
+          {children}
+          </SessionProvider>
+        </body>
     </html>
   )
 }
