@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId], map: "Account_userId_fkey")
+}
+
+model Group {
+  id             String         @id
+  name           String
+  description    String?
+  dataset        String?
+  userId         String
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime
+  allImagesCoded Boolean        @default(false)
+  User           User           @relation(fields: [userId], references: [id])
+  ProfileGroup   ProfileGroup[]
+
+  @@index([userId], map: "Group_userId_fkey")
+}
+
+model Image {
+  id        String   @id
+  coder     String?  @db.Text
+  isCoded   Boolean  @default(false)
+  profileId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  name      String
+  path      String
+  Profile   Profile  @relation(fields: [profileId], references: [id])
+
+  @@index([profileId], map: "Image_profileId_fkey")
+}
+
+model Profile {
+  id           String         @id
+  name         String
+  bio          String?
+  userId       String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime
+  Image        Image[]
+  User         User           @relation(fields: [userId], references: [id])
+  ProfileGroup ProfileGroup[]
+
+  @@index([userId], map: "Profile_userId_fkey")
+}
+
+model ProfileGroup {
+  id        String   @id
+  profileId String
+  groupId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  Group     Group    @relation(fields: [groupId], references: [id])
+  Profile   Profile  @relation(fields: [profileId], references: [id])
+
+  @@index([groupId], map: "ProfileGroup_groupId_fkey")
+  @@index([profileId], map: "ProfileGroup_profileId_fkey")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Session_userId_fkey")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?   @unique
+  email         String    @unique
+  password      String?
+  firstName     String?
+  lastName      String?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  emailVerified DateTime?
+  accounts      Account[]
+  Group         Group[]
+  Profile       Profile[]
+  sessions      Session[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
