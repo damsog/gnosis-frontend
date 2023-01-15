@@ -1,4 +1,5 @@
 import { User } from "@prisma/client";
+import { Encryptor } from "../lib/encryptor";
 import prisma from "../lib/prisma";
 
 
@@ -56,6 +57,8 @@ export default class userService {
     }
 
     static async update(id: string, user: UserDataModel): Promise<User | null> {
+        if(user.password || user.password !== "") user.password = await Encryptor.encryptPassword(user.password);
+
         const userUpdated = await prisma.user.update({
             where: {
                 id
