@@ -53,7 +53,7 @@ const DropDownAccount = ({up}:DropUpAccountProps)=> {
             <div className="py-1">
                 <Menu.Item>
                     {({ active }) => (
-                        <a href={`/${session?.user?.email}`} className={classNames( active ? 'bg-[#302a36] text-gray-200' : 'text-gray-400','block px-4 py-2 text-sm')}>
+                        <a href={`/main/settings/${session?.user?.email}`} className={classNames( active ? 'bg-[#302a36] text-gray-200' : 'text-gray-400','block px-4 py-2 text-sm')}>
                             Account settings
                         </a>
                     )}
