@@ -12,7 +12,7 @@ interface LoginFormClassOptions {
 }
 
 interface LoginFormOptions {
-    username: string,
+    email: string,
     password: string
 }
 
@@ -34,11 +34,11 @@ const LoginForm = ({className}: LoginFormClassOptions) => {
             <form className=' px-16 py-8 bg-[#221c28] rounded-2xl flex-row justify-between ' onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <input 
-                        {...register("username", { required: true })}
+                        {...register("email", { required: true })}
                         className='m-4 rounded-lg p-3 text-gray-400 text-lg bg-[#2b2532] focus:bg-[#3f3847] focus:outline-none'
                         type="text"
-                        name="username"
-                        placeholder="Username"
+                        name="email"
+                        placeholder="Email"
                     />                                
                 </div>
                 <div>
