@@ -47,7 +47,7 @@ const DisplayFormCard = ({id, displayOption, option, value, description, classNa
         <div className={`my-10 ${className}`}>
             <form onSubmit={handleSubmit(onSubmit)} className="flex justify-between ">
                 <div>
-                    <h1 className=" font-bold py-1 text-xl" >{displayOption}</h1>
+                    <h1 className=" font-bold text-gray-300 py-1 text-xl" >{displayOption}</h1>
                     <input 
                         {...register("id", {required: true})}
                         type="hidden"
@@ -59,7 +59,7 @@ const DisplayFormCard = ({id, displayOption, option, value, description, classNa
                         type="text"
                         placeholder={value}
                         value={value}
-                        className="rounded-lg p-1 text-gray-800" 
+                        className="rounded-lg p-1 text-gray-400 bg-[#2b2532]" 
                         disabled={!editing}
                     />
                 </div>
@@ -67,17 +67,18 @@ const DisplayFormCard = ({id, displayOption, option, value, description, classNa
                     {editing && (
                         <input 
                             type="submit" 
-                            className="border px-4 py-1 rounded-2xl border-gray-200 
-                            hover:bg-green-100" 
+                            className="border px-4 py-1 text-gray-400 rounded-2xl
+                            border-green-700 shadow-lg bg-[#2b2532] hover:text-gray-200 shadow-green-700/50 hover:bg-green-700" 
                             value="Save"
                         />
                     )}
-                    <button type="button" onClick={()=>setEditing(!editing)} className="border px-4 py-1 rounded-2xl border-gray-200 
-                                hover:bg-gray-100">{editing ? "Cancel" : "Edit"}</button>
+                    <button type="button" onClick={()=>setEditing(!editing)} className="text-gray-300 border px-4 py-1 rounded-2xl
+                                border-green-700 shadow-lg bg-[#2b2532] hover:text-gray-200
+                                shadow-green-700/50 hover:bg-[#3f3847]">{editing ? "Cancel" : "Edit"}</button>
                 </div>
             </form>
-            <hr className="pb-2" />
-            <p className=" text-sm text-gray-700 " >{description}</p>
+            <hr className="pb-2 border-green-700" />
+            <p className=" text-sm text-gray-300 " >{description}</p>
         </div>
     );
 }
