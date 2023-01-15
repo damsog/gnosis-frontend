@@ -3,6 +3,7 @@ import { MdDarkMode } from 'react-icons/md';
 import { IoLanguageSharp } from 'react-icons/io5';
 import { MdViewSidebar } from 'react-icons/md';
 import DropDownAccount from './DropDownAccount';
+import Link from 'next/link';
 
 const TopBar = () => {
     return (
@@ -10,7 +11,9 @@ const TopBar = () => {
             <div className='w-full flex items-center justify-between px-4'>
                 {/* Left Side */}
                 <div>
-                    <h5 className=" text-2xl cursor-pointer text-gray-300 hover:text-green-600"><MdViewSidebar/></h5>
+                    <Link href="/main">
+                        <h5 className=" text-2xl cursor-pointer text-gray-300 hover:text-green-600"><MdViewSidebar/></h5>
+                    </Link>
                 </div>
                 {/* Right Side */}
                 <div className='flex items-center space-x-4'>
