@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface DisplayFormCardProps {
@@ -7,6 +7,7 @@ interface DisplayFormCardProps {
     option: "name" | "firstName" | "lastName" | "email" | "password" | "image" | "password",
     value: string, 
     description: string,
+    obscured: boolean | null,
     className?: string
 }
 
@@ -21,10 +22,15 @@ interface IFormInput {
 }
 
 
-const DisplayFormCard = ({id, displayOption, option, value, description, className}:DisplayFormCardProps) => {
+const DisplayFormCard = ({id, displayOption, option, value, description, obscured, className}:DisplayFormCardProps) => {
 
     const [ editing, setEditing ] = useState(false);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<IFormInput>();
+    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<IFormInput>();
+
+    const onCancel = () => {
+        reset();
+        setEditing(!editing) 
+    }
 
     const onSubmit:SubmitHandler<IFormInput> = async (data) => {
         console.log(`Submitting data:  ${JSON.stringify(data)}`);
@@ -56,9 +62,8 @@ const DisplayFormCard = ({id, displayOption, option, value, description, classNa
                     />
                     <input 
                         {...register(option, {required: true})}
-                        type="text"
-                        placeholder={value}
-                        value={value}
+                        type={`${obscured ? "password" : "text"}`}
+                        placeholder={`${(obscured && value) ?  "*******": value}`}
                         className="rounded-lg p-1 text-gray-400 bg-[#2b2532]" 
                         disabled={!editing}
                     />
@@ -72,7 +77,7 @@ const DisplayFormCard = ({id, displayOption, option, value, description, classNa
                             value="Save"
                         />
                     )}
-                    <button type="button" onClick={()=>setEditing(!editing)} className="text-gray-300 border px-4 py-1 rounded-2xl
+                    <button type="button" onClick={onCancel} className="text-gray-300 border px-4 py-1 rounded-2xl
                                 border-green-700 shadow-lg bg-[#2b2532] hover:text-gray-200
                                 shadow-green-700/50 hover:bg-[#3f3847]">{editing ? "Cancel" : "Edit"}</button>
                 </div>

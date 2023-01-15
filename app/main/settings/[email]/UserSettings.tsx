@@ -32,6 +32,7 @@ const UserSettings = ({user}:SettingsProps) => {
                                         option="name"
                                         value={user.name!}
                                         description="Your name appears on your Profile page, as your byline, and in your responses. It is a required field."
+                                        obscured={false}
                                         />
                                     <DisplayFormCard
                                         id={user.id}
@@ -39,6 +40,7 @@ const UserSettings = ({user}:SettingsProps) => {
                                         option="firstName"
                                         value={user.firstName!}
                                         description="Your name appears on your Profile page, as your byline, and in your responses. It is a required field."
+                                        obscured={false}
                                         />
                                     <DisplayFormCard
                                         id={user.id}
@@ -46,6 +48,7 @@ const UserSettings = ({user}:SettingsProps) => {
                                         option="lastName"
                                         value={user.lastName!}
                                         description="Your name appears on your Profile page, as your byline, and in your responses. It is a required field."
+                                        obscured={false}
                                         />
                                     
                                     <div className="flex flex-row justify-between" >
@@ -62,6 +65,7 @@ const UserSettings = ({user}:SettingsProps) => {
                                         option="email"
                                         value={user.email!}
                                         description="Your email address is used to sign in to your account, and to send you notifications. It is a required field."
+                                        obscured={false}
                                         />
                                     <DisplayFormCard
                                         id={user.id}
@@ -69,6 +73,7 @@ const UserSettings = ({user}:SettingsProps) => {
                                         option="password"
                                         value={user.password!}
                                         description="Your password is used to sign in to your account. It is a required field."
+                                        obscured={true}
                                         />
                                     
                                 </div>
