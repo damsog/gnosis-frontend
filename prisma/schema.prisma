@@ -103,6 +103,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   emailVerified DateTime?
+  apiKey        String?   @unique
   accounts      Account[]
   Group         Group[]
   Profile       Profile[]
