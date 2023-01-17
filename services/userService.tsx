@@ -1,6 +1,7 @@
 import { User } from "@prisma/client";
 import { Encryptor } from "../lib/encryptor";
 import prisma from "../lib/prisma";
+import crypto from 'crypto';
 
 
 export interface UserDataModel {
@@ -38,6 +39,29 @@ export default class userService {
         return user;
     }
 
+    static async genertateApiKey(id: string): Promise<User | null> {
+        const user = await prisma.user.update({
+            where: {
+                id: id
+            },
+            data: {
+                apiKey: crypto.randomUUID()
+            }
+        });
+
+        return user;
+    }
+
+    static async getByApiKey(apiKey: string): Promise<User | null> {
+        const user = await prisma.user.findFirst({
+            where: {
+                apiKey: apiKey
+            }
+        });
+
+        return user;
+    }
+
     static async findByEmail(email: string): Promise<User | null> {
         const user = await prisma.user.findFirst({
             where: {
@@ -50,7 +74,7 @@ export default class userService {
     static async findByUsername(username: string): Promise<User | null> {
         const user = await prisma.user.findFirst({
             where: {
-                username
+                name: username
             }
         });
         return user;
