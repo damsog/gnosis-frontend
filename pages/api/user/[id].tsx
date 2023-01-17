@@ -12,20 +12,27 @@ const router = createRouter<UserRequest, NextApiResponse>();
 
 router.get( async (req: UserRequest, res: NextApiResponse) =>{
     const token = await getToken({ req })
-    if (token) {
-        // Signed in
-        console.log("JSON Web Token", token)    
-    }
+    if (!token) return res.status(401).json({"mesage":"Unauthorized"});
+    if(token.sub !== req.query.id) return res.status(401).json({"mesage":"Unauthorized"});
+
     const user = await userService.findById(req.query.id);
     return res.status(200).json(user);
 });
 
 router.put( async (req: UserRequest, res: NextApiResponse) =>{
+    const token = await getToken({ req })
+    if (!token) return res.status(401).json({"mesage":"Unauthorized"});
+    if(token.sub !== req.query.id) return res.status(401).json({"mesage":"Unauthorized"});
+
     const user = await userService.update(req.query.id, req.body);
     return res.status(200).json(user);
 });
 
 router.delete( async (req: UserRequest, res: NextApiResponse) =>{
+    const token = await getToken({ req })
+    if (!token) return res.status(401).json({"mesage":"Unauthorized"});
+    if(token.sub !== req.query.id) return res.status(401).json({"mesage":"Unauthorized"});
+
     try{
         const user = await userService.delete(req.query.id);
         return res.status(200).json(user);
