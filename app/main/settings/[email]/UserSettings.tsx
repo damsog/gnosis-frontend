@@ -5,6 +5,7 @@ import DisplayFormCard from "./DisplayFormCard";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import ApiKeyFormCard from "./ApiKeyFormCard";
 
 interface SettingsProps {
     user: User;
@@ -74,6 +75,12 @@ const UserSettings = ({user}:SettingsProps) => {
                                         value={user.password!}
                                         description="Your password is used to sign in to your account. It is a required field."
                                         obscured={true}
+                                        />
+                                    <ApiKeyFormCard
+                                        id={user.id}
+                                        displayOption="ApiKey"
+                                        value={user.apiKey!}
+                                        description="Your password is used to sign in to your account. It is a required field."
                                         />
                                     
                                 </div>
