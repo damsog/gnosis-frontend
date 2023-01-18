@@ -8,7 +8,7 @@ type PageProps = {
 }
 
 const getUserByEmail = async (email: string) => {
-    const response = await fetch(`http://192.168.1.3:3000/api/user/email/${email}`);
+    const response = await fetch(`http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/user/email/${email}`);
     const data: User = await response.json();
     return data;
 }

@@ -28,7 +28,7 @@ const DisplayFormCard = ({id, displayOption, value, description, className}:Disp
 
     const onGenerate = async () => {
         try{
-            const response = await fetch(`http://localhost:3000/api/user/genapikey/${id}`);
+            const response = await fetch(`/api/user/genapikey/${id}`);
             const data: User = await response.json();
             console.log(`Data: ${JSON.stringify(data)}`);
             setApiKey(data.apiKey);
