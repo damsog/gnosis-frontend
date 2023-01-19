@@ -12,13 +12,17 @@ export class ApiFaceDetectionService {
     // Class Variables
     // Signaling server url
     private url: string = 'https://192.168.1.3:4000/api';
+
+    constructor(){
+    }
     
     // Class Methods
-    async postFaceDetectionStreamSDP(data: RtcOfferDataModel): Promise<any> {
-        const response = await fetch(`${this.url}/recognition/stream`, {
+    async postFaceDetectionStreamSDP(data: RtcOfferDataModel, apikey: string): Promise<any> {
+        const response = await fetch(`${this.url}/detection/stream`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': apikey
             },
             body: JSON.stringify(data),
         })
@@ -31,10 +35,11 @@ export class FaceDetectionStream{
     iceGatheringLog: string = 'iceGathering: ';
     iceConnectionLog: string = 'iceConnection: ';
     signalingLog: string = 'signaling: ';
-    apiFaceDetectionService: ApiFaceDetectionService = new ApiFaceDetectionService();
+    apiFaceDetectionService: ApiFaceDetectionService;
     video: MediaStream | null = null;
 
     constructor(){
+        this.apiFaceDetectionService = new ApiFaceDetectionService();
     }
 
     // Class Methods
@@ -78,7 +83,7 @@ export class FaceDetectionStream{
     // Waits for Ice to complete. Then sends the offer to the  other peers
     // through an endpoint on the signaling server, the other peer sends the answer sdp
     // and then use this sdp to set the remote description and complete the connection
-    negotiate() {
+    negotiate(apikey: string): Promise<void> {
         // Creates Offer sdp to set the local Description
         return this.pc.createOffer().then((offer) => {
             return this.pc.setLocalDescription(offer);
@@ -112,7 +117,7 @@ export class FaceDetectionStream{
             let type:string = offer!.type as string;
             let offerModel:RtcOfferDataModel = {sdp, type}
             // Sending the offer
-            return this.apiFaceDetectionService.postFaceDetectionStreamSDP(offerModel);
+            return this.apiFaceDetectionService.postFaceDetectionStreamSDP(offerModel, apikey);
         }).then((answer) => {
         // Setting the remote Description once an answer is gotten
             this.pc.setRemoteDescription(answer);
@@ -125,7 +130,7 @@ export class FaceDetectionStream{
     }
 
     // Function to start The WebRTC connection process
-    async start(): Promise<MediaStream> {
+    async start(apikey: string): Promise<MediaStream> {
         let resolution: string;
         let resolution_vals: string[];
         let constraints: any;
@@ -154,17 +159,34 @@ export class FaceDetectionStream{
             } catch (error) {
                 console.log(error);
             }
-            await this.negotiate();                
+            await this.negotiate(apikey);                
         } else {
-            this.negotiate();
+            await this.negotiate(apikey);
         }
         
-        if(this.video == null) throw new Error("Failed to get video stream");
-        
-        return this.video;
+        // Waiting for the video stream to be available before returning it
+        return await new Promise((resolve, reject) => {
+            let countDown = 10;
+            console.log("Waiting for video stream");
+            var videoWaitInterval = setInterval(()=> {
+                if(this.video){
+                    console.log("Video stream available");
+                    resolve(this.video);
+                    clearInterval(videoWaitInterval);
+                }
+                else{
+                    countDown--;
+                    if(countDown <= 0)
+                        reject("No video stream available");
+                        clearInterval(videoWaitInterval);
+                }
+            }, 500)
+        });
     }
 
     stop(){
+        if(!this.pc) return;
+
         // close transceivers
         if (this.pc.getTransceivers) {
             this.pc.getTransceivers().forEach((transceiver) => {
