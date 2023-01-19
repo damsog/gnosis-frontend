@@ -18,13 +18,16 @@ export const authOptions:NextAuthOptions = {
       if (user) {
         token.uid = user.id;
         token.email = user.email;
+        token.apikey = user.apiKey;
       }
       return token;
     },
     async session({ session, token }) {
       if (session?.user) {
+        session.apikey = token.apikey;
         session.userId = token.uid;
         session.userEmail = token.email;
+        console.log('data: ' + JSON.stringify(session.apikey));
       }
       return session
     }
