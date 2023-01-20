@@ -83,13 +83,14 @@ export class FaceDetectionStream{
     // Waits for Ice to complete. Then sends the offer to the  other peers
     // through an endpoint on the signaling server, the other peer sends the answer sdp
     // and then use this sdp to set the remote description and complete the connection
-    negotiate(apikey: string): Promise<void> {
-        // Creates Offer sdp to set the local Description
-        return this.pc.createOffer().then((offer) => {
-            return this.pc.setLocalDescription(offer);
-        }).then(() => {
-        // wait for ICE gathering to complete
-            return new Promise<void>((resolve) => {
+    negotiate = async (apikey: string): Promise<void> => {
+        try{
+            // Creates Offer sdp to set the local Description
+            const offer = await this.pc.createOffer();
+            await this.pc.setLocalDescription(offer);
+            
+            // wait for ICE gathering to complete
+            await new Promise<void>((resolve) => {
                 if (this.pc.iceGatheringState === 'complete') {
                     resolve();
                 } else {
@@ -102,31 +103,30 @@ export class FaceDetectionStream{
                     this.pc.addEventListener('icegatheringstatechange', checkState);
                 }
             });
-        }).then(() => {
-        // Codec filtering and sending the offer to the Signaling server which will pass
-        // offer to the other peer
-            let offer: RTCSessionDescription|null= this.pc.localDescription;
-            let codec:string = 'default';
-                
+
+            // Codec filtering and sending the offer to the Signaling server which will pass
+            let codec:string = 'default';            
             if(codec !== 'default' ){
                 console.log("not default");
                 //offer!.sdp = this.sdpFilterCodec('video', codec, offer!.sdp);
             }
-
-            let sdp:string = offer!.sdp as string;
-            let type:string = offer!.type as string;
+            
+            // offer to the other peer
+            let sdp:string = this.pc.localDescription!.sdp as string;
+            let type:string = this.pc.localDescription!.type as string;
             let offerModel:RtcOfferDataModel = {sdp, type}
-            // Sending the offer
-            return this.apiFaceDetectionService.postFaceDetectionStreamSDP(offerModel, apikey);
-        }).then((answer) => {
-        // Setting the remote Description once an answer is gotten
+            
+            // Sending the offer and getting the answer
+            const answer = await this.apiFaceDetectionService.postFaceDetectionStreamSDP(offerModel, apikey);
+
+            // Setting the remote Description once an answer is gotten
             this.pc.setRemoteDescription(answer);
             console.log("Connection completed");
-        }).catch((e)=> {
-        // Something went wrong
+        }catch(error){
+            // Something went wrong
             console.log('Error trying to establish connection');
-            alert(e);
-        });
+            alert(error);
+        };
     }
 
     // Function to start The WebRTC connection process
