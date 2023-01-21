@@ -11,14 +11,15 @@ export type RtcOfferDataModel = {
 export class ApiFaceDetectionService {
     // Class Variables
     // Signaling server url
-    private url: string = 'https://192.168.1.3:4000/api';
+    private apiUrl: string;
 
-    constructor(){
+    constructor(apiUrl: string){
+        this.apiUrl = apiUrl;
     }
     
     // Class Methods
     async postFaceDetectionStreamSDP(data: RtcOfferDataModel, apikey: string): Promise<any> {
-        const response = await fetch(`${this.url}/detection/stream`, {
+        const response = await fetch(`${this.apiUrl}/detection/stream`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,8 +39,8 @@ export class FaceDetectionStream{
     apiFaceDetectionService: ApiFaceDetectionService;
     video: MediaStream | null = null;
 
-    constructor(){
-        this.apiFaceDetectionService = new ApiFaceDetectionService();
+    constructor(apiUrl: string){
+        this.apiFaceDetectionService = new ApiFaceDetectionService(apiUrl);
     }
 
     // Class Methods

@@ -10,7 +10,7 @@ import VideoElement from './VideoElement';
 function FaceDetectionLive(): any {
     const [videoStream, setVideoStream] = useState<MediaStream>();
     const { data: session, status } = useSession({ required: true });
-    const faceDetectionStream: FaceDetectionStream = new FaceDetectionStream();
+    const faceDetectionStream: FaceDetectionStream = new FaceDetectionStream(`${process.env.NEXT_PUBLIC_API_URL}/api`);
 
     const startVideo = async () => {
         console.log('start video' + JSON.stringify(session));
