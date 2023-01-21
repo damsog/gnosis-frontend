@@ -29,11 +29,11 @@ const MainMenuCard = ({title,description,icon,redirectPath,className}:MainMenuCa
                     <p className='text-gray-300 group-hover:text-gray-100 text-center'>{description}</p>
                 </div>
                 {/* Options. Selectable */}
-                <div className='flex flex-col items-center justify-between'>
+                <div className='flex flex-col items-center justify-between my-4'>
                     <div className='flex space-x-20'>
-                        <h5 className="hover:text-gray-200 border border-green-700 shadow-lg shadow-green-700/50 rounded-lg px-4 py-1 hover:bg-[#3f3847]
+                        <h5 className="hover:text-gray-200 border-green-700 shadow-lg shadow-green-700/50 rounded-lg px-4 py-1 hover:bg-[#3f3847]
                                  active:translate-y-1 text-4xl cursor-pointer text-gray-300 "><AiOutlineCamera/></h5>
-                        <h5 className="hover:text-gray-200 border border-green-700 shadow-lg shadow-green-700/50 rounded-lg px-4 py-1 hover:bg-[#3f3847]
+                        <h5 className="hover:text-gray-200 border-green-700 shadow-lg shadow-green-700/50 rounded-lg px-4 py-1 hover:bg-[#3f3847]
                                  active:translate-y-1 text-4xl cursor-pointer text-gray-300 "><BsCameraReels/></h5>
                     </div>
                 </div>
