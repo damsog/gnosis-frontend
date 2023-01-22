@@ -33,6 +33,7 @@ function ProfileList({userId, apikey}: ProfilesProps) {
                     profileId={profile.id}
                     name={profile.name}
                     description={profile.bio!}
+                    apikey={apikey}
                     coded={true}
                 />
                 </div>
