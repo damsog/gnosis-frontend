@@ -8,13 +8,18 @@ interface ProfilesProps {
 }
 
 const getProfiles = async (userId: string, apikey: string) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/user/${userId}`, {
-        method: 'GET',
-        headers: {
-            'Authorization': apikey
-        }})
-    const profiles: Profile[] = await response.json();
-    return profiles;
+    try{
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/user/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': apikey
+            }})
+        const profiles: Profile[] = await response.json();
+        return profiles;
+    }catch(e){
+        console.log(`Error: ${e}`);
+        return [];
+    }
 }
 
 function ProfileList({userId, apikey}: ProfilesProps) {
