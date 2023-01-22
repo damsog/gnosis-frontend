@@ -1,4 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
+import { useRouter } from 'next/navigation';
 import { Fragment, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IoAddSharp } from 'react-icons/io5'
@@ -15,29 +16,30 @@ interface NewProfileDialogProps {
 }
 
 export default function NewProfileDialog({userId, apikey}:NewProfileDialogProps) {
-  let [isOpen, setIsOpen] = useState(false)
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<CreateProfileFormOptions>();
+    let [isOpen, setIsOpen] = useState(false);
+    const router = useRouter();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<CreateProfileFormOptions>();
 
-  const onSubmit: SubmitHandler<CreateProfileFormOptions> = async data => {
-    console.log(`Submitting data:  ${JSON.stringify(data)}`);
+    const onSubmit: SubmitHandler<CreateProfileFormOptions> = async data => {
+        console.log(`Submitting data:  ${JSON.stringify(data)}`);
 
-    try{
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': apikey
-            },
-            body: JSON.stringify(data)
-        });
-        console.log(`Response: ${JSON.stringify(response)}`);
-        setIsOpen(false);
-        
-    }catch(e){
-        console.log(`Error: ${e}`);
-        setIsOpen(false);
-    }
-  };
+        try{
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': apikey
+                },
+                body: JSON.stringify(data)
+            });
+            console.log(`Response: ${JSON.stringify(response)}`);
+            setIsOpen(false);
+            router.refresh();        
+        }catch(e){
+            console.log(`Error: ${e}`);
+            setIsOpen(false);
+        }
+    };
 
   function closeModal() {
     setIsOpen(false)
