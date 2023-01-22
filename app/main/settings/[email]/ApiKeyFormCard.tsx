@@ -44,15 +44,15 @@ const DisplayFormCard = ({id, displayOption, value, description, className}:Disp
                     <h1 className=" font-bold text-gray-300 py-1 text-xl" >{displayOption}</h1>
                     <label className="rounded-lg p-1 text-gray-400 bg-[#2b2532] w-10 h-4">{`${(apiKey && showing) ? apiKey : "********" }`}</label>
                 </div>
-                <div className="flex flex-row">
+                <div className="flex items-center">
                     {showing && (
                         <button 
-                            className="border px-4 py-1 text-gray-400 rounded-2xl
-                            border-green-700 shadow-lg bg-[#2b2532] hover:text-gray-200 shadow-green-700/50 hover:bg-green-700" 
+                            className="px-4 py-2 text-gray-400 rounded-2xl
+                            border-green-700 shadow-md bg-[#2b2532] hover:text-gray-200 shadow-green-700/50 hover:bg-green-700" 
                          onClick={onGenerate}>Generate</button>
                     )}
-                    <button type="button" onClick={onCancel} className="text-gray-300 border px-4 py-1 rounded-2xl
-                                border-green-700 shadow-lg bg-[#2b2532] hover:text-gray-200
+                    <button type="button" onClick={onCancel} className="text-gray-300 mx-1 px-4 py-2 rounded-2xl
+                                border-green-700 shadow-md bg-[#2b2532] hover:text-gray-200
                                 shadow-green-700/50 hover:bg-[#3f3847]">{showing ? "Hide" : "Show"}</button>
                 </div>
             </div>
