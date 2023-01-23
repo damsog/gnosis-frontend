@@ -20,7 +20,7 @@ const ProfilesPage = () => {
     if(status === "loading") return <div className="text-green-700">Loading...</div>  
 
     return (
-        <>              
+        <div className="bg-[#221c28]">              
             <div className='flex justify-center'>
                 <h5 className='text-gray-300 text-lg'>Profiles</h5>
             </div>
@@ -35,7 +35,7 @@ const ProfilesPage = () => {
                     <ProfileList userId={session.userId as string} apikey={session.apikey as string} />
                 </Suspense>
             </div>
-        </>
+        </div>
     );
 };
 
