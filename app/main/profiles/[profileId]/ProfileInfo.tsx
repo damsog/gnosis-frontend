@@ -20,8 +20,15 @@ const getProfile = async (profileId: string, apikey: string) => {
 
 export default function ProfileInfo( {profileId, apikey} : ProfileInfoProps ) {
     const profile = use( getProfile(profileId, apikey) );
+
+    const capitalize = (text: string) => {
+        return text.charAt(0).toUpperCase() + text.slice(1);
+    }
     
     return (
-        <div>ProfileInfo for {profile.name}</div>
+        <>
+            <h2 className='text-gray-200 text-2xl'>{capitalize(profile.name)}</h2>
+            <p className=' mt-8 text-gray-400 text-sm'>{profile.bio}</p>
+        </>
     )
 }
