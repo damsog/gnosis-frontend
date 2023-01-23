@@ -1,5 +1,6 @@
 import { Profile } from '@prisma/client';
 import React, { use } from 'react'
+import { useQuery } from 'react-query';
 import ProfileOption from './ProfileOption';
 
 interface ProfilesProps {
@@ -23,11 +24,17 @@ const getProfiles = async (userId: string, apikey: string) => {
 }
 
 function ProfileList({userId, apikey}: ProfilesProps) {
-    const profiles = use( getProfiles(userId, apikey) );
+    // TODO: Remove this once use hook is fixed
+    //const profiles = use( getProfiles(userId, apikey) );
+    const query = useQuery(["profiles",userId, apikey], () => getProfiles(userId, apikey) )
+    if (query.isLoading) {
+      return <h2>Loading...</h2>;
+    }
+
 
     return (
         <>
-            {profiles.map( (profile) => (
+            {query.data!.map( (profile) => (
                 <div key={profile.id}>
                 <ProfileOption
                     profileId={profile.id}

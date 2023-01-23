@@ -4,6 +4,7 @@ import { GiCheckMark } from 'react-icons/gi'
 import { BsExclamationLg } from 'react-icons/bs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useQueryClient } from 'react-query'
 
 interface ProfileOptionProps {
     profileId: string
@@ -15,21 +16,26 @@ interface ProfileOptionProps {
 }
 
 export default function ProfileOption({profileId, name, description, coded, apikey, className}:ProfileOptionProps) {
-  const router = useRouter();
-  
-  const deleteProfile = async () => {
-      try{
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/${profileId}`, {
-              method: "DELETE",
-              headers: {
-                  'Authorization': apikey
-              },
-          });
-          console.log(`Response: ${JSON.stringify(response)}`);
-          router.refresh();        
-      }catch(e){
-          console.log(`Error: ${e}`);
-      }
+    const router = useRouter();
+    // TODO: Remove this once use hook is fixed
+    const queryClient = useQueryClient();
+
+    const deleteProfile = async () => {
+        try{
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/${profileId}`, {
+                method: "DELETE",
+                headers: {
+                    'Authorization': apikey
+                },
+            });
+            console.log(`Response: ${JSON.stringify(response)}`);
+
+            // TODO: Remove this once use hook is fixed
+            //router.refresh();        
+            queryClient.invalidateQueries('profiles');
+        }catch(e){
+            console.log(`Error: ${e}`);
+        }
   };
 
   return (

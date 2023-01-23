@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { Fragment, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IoAddSharp } from 'react-icons/io5'
+import { useQueryClient } from 'react-query';
 
 interface CreateProfileFormOptions {
     userId: string;
@@ -19,6 +20,9 @@ export default function NewProfileDialog({userId, apikey}:NewProfileDialogProps)
     let [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
     const { register, handleSubmit, watch, formState: { errors } } = useForm<CreateProfileFormOptions>();
+    
+    // TODO: Remove this once use hook is fixed
+    const queryClient = useQueryClient();
 
     const onSubmit: SubmitHandler<CreateProfileFormOptions> = async data => {
         console.log(`Submitting data:  ${JSON.stringify(data)}`);
@@ -34,7 +38,10 @@ export default function NewProfileDialog({userId, apikey}:NewProfileDialogProps)
             });
             console.log(`Response: ${JSON.stringify(response)}`);
             setIsOpen(false);
-            router.refresh();        
+
+            // TODO: Remove this once use hook is fixed
+            //router.refresh();        
+            queryClient.invalidateQueries('profiles');
         }catch(e){
             console.log(`Error: ${e}`);
             setIsOpen(false);
