@@ -44,7 +44,7 @@ export default function NewimageDialog({profileId, apikey}:NewImageDialogProps) 
 
           // TODO: Remove this once use hook is fixed
           //router.refresh();        
-          queryClient.invalidateQueries('profiles');
+          queryClient.invalidateQueries('images');
       }catch(e){
           console.log(`Error: ${e}`);
           setIsOpen(false);
