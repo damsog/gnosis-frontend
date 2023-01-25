@@ -105,31 +105,33 @@ export default function NewProfileDialog({userId, apikey}:NewProfileDialogProps)
                       Create a new profile to use on the face recognition app.
                     </p>
                     <form className='rounded-2xl flex-row justify-between ' onSubmit={handleSubmit(onSubmit)}>
-                        <div>
-                            <input 
-                                {...register("userId", {required: true})}
-                                type="hidden"
-                                name="userId"
-                                value={userId}
-                            />
-                        </div>
-                        <div>
-                            <input 
-                                {...register("name", { required: true })}
-                                className='m-4 rounded-lg p-3 text-gray-400 text-md bg-[#2b2532] focus:bg-[#3f3847] focus:outline-none'
-                                type="text"
-                                name="name"
-                                placeholder="Name"
-                            />                                
-                        </div>
-                        <div>
-                            <input 
-                                {...register("bio", { required: true })}
-                                className='m-4 rounded-lg p-3 text-gray-400 text-md bg-[#2b2532] focus:bg-[#3f3847] focus:outline-none'
-                                type="text"
-                                name="bio"
-                                placeholder="Bio"
-                            />                                
+                        <div className='mx-4'>
+
+                            <div>
+                                <input 
+                                    {...register("userId", {required: true})}
+                                    type="hidden"
+                                    name="userId"
+                                    value={userId}
+                                />
+                            </div>
+                            <div>
+                                <input 
+                                    {...register("name", { required: true })}
+                                    className='my-4 w-full rounded-lg p-3 text-gray-400 text-md bg-[#2b2532] focus:bg-[#3f3847] focus:outline-none'
+                                    type="text"
+                                    name="name"
+                                    placeholder="Name"
+                                />                                
+                            </div>
+                            <div>
+                                <textarea 
+                                    {...register("bio", { required: true, maxLength: 1000 })}
+                                    className='my-4 w-full rounded-lg p-3 text-gray-400 text-md bg-[#2b2532] focus:bg-[#3f3847] focus:outline-none'
+                                    name="bio"
+                                    placeholder="Bio"
+                                />                                
+                            </div>
                         </div>
                         <div className="mt-4 flex justify-between">
                             <button
