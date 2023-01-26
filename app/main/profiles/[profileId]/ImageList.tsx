@@ -50,7 +50,7 @@ function ProfileList({profileId, apikey}: ImagesProps) {
     }
 
     return (
-        <>
+        <div className='flex flex-col gap-4 md:grid md:grid-cols-2'>
             {query.data!.map( (image, index) => (
                 <div key={image.id}>
                 <ImageOption
@@ -63,7 +63,7 @@ function ProfileList({profileId, apikey}: ImagesProps) {
                 />
                 </div>
             ))}
-        </>
+        </div>
     );
 }
 

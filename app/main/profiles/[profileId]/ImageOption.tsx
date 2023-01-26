@@ -42,11 +42,9 @@ export default function ImageOption({imageId, name, coder, isCoded, imgSrc, apik
   return (
     <div className={`flex flex-row items-center justify-between p-1 rounded-lg 
                     bg-[#2b2532] hover:bg-[#3f3847] ${className} group`}>
-        <div className='mx-4 my-2 cursor-pointer flex items-center space-x-4'>
-            <img className='w-10 h-10 rounded-full border border-green-700' src={imgSrc} alt={name} />
-            <div className=''>
-                <h5 className='text-gray-300'>{name}</h5>
-            </div>
+        <div className='mx-4 my-2 cursor-pointer flex flex-col items-center space-x-4'>
+                <img className=' h-48 w-auto rounded-lg border border-green-700 hover:transition-transform' src={imgSrc} alt={name} />
+                <h5 className='text-gray-300 font-thin font'>{name}</h5>
         </div>
         <div className='flex'>
             <h5 className="invisible group-hover:visible mx-1 rounded-lg px-3 py-1 hover:bg-[#2b2532]
