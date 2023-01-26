@@ -23,10 +23,10 @@ const MainMenu = () => {
                     className='bg-[#2b2532] hover:bg-[#302a36]'
                 />
                 <MainMenuCard 
-                    title='Groups'
-                    description='Create groups of profiles to create a reocnition dataset, access control, continuous vigilance.'
-                    icon='/main_menu_images/groups_icon.png'
-                    redirectPath='/main/groups'
+                    title='Profiles'
+                    description='Create profiles for people to be recognized in images or videos.'
+                    icon='/main_menu_images/profiles_icon.png'
+                    redirectPath='/main/profiles'
                     className='bg-[#2b2532] hover:bg-[#302a36]'
                 />
                 <MainMenuCard 
@@ -44,10 +44,10 @@ const MainMenu = () => {
                     className='bg-[#2b2532] hover:bg-[#302a36]'
                 />
                 <MainMenuCard 
-                    title='Profiles'
-                    description='Create profiles for people to be recognized in images or videos.'
-                    icon='/main_menu_images/profiles_icon.png'
-                    redirectPath='/main/profiles'
+                    title='Groups'
+                    description='Create groups of profiles to create a reocnition dataset, access control, continuous vigilance.'
+                    icon='/main_menu_images/groups_icon.png'
+                    redirectPath='/main/groups'
                     className='bg-[#2b2532] hover:bg-[#302a36]'
                 />
             </div>

@@ -11,11 +11,12 @@ interface ImageOptionProps {
     name: string
     coder: string
     isCoded: boolean
+    imgSrc: string
     apikey: string
     className?: string
 }
 
-export default function ImageOption({imageId, name, coder, isCoded, apikey, className}:ImageOptionProps) {
+export default function ImageOption({imageId, name, coder, isCoded, imgSrc, apikey, className}:ImageOptionProps) {
     const router = useRouter();
     // TODO: Remove this once use hook is fixed
     const queryClient = useQueryClient();
@@ -42,7 +43,7 @@ export default function ImageOption({imageId, name, coder, isCoded, apikey, clas
     <div className={`flex flex-row items-center justify-between p-1 rounded-lg 
                     bg-[#2b2532] hover:bg-[#3f3847] ${className} group`}>
         <div className='mx-4 my-2 cursor-pointer flex items-center space-x-4'>
-            <img className='w-10 h-10 rounded-full border border-green-700' src="/no_avatar.webp" alt="" />
+            <img className='w-10 h-10 rounded-full border border-green-700' src={imgSrc} alt={name} />
             <div className=''>
                 <h5 className='text-gray-300'>{name}</h5>
             </div>
