@@ -55,11 +55,12 @@ function ProfileList({profileId, apikey}: ImagesProps) {
                 <div key={image.id}>
                 <ImageOption
                     imageId={image.id}
+                    profileId={image.profileId}
                     name={image.name}
                     coder={image.coder ? image.coder : ""}
                     imgSrc={images[index]}
                     apikey={apikey}
-                    isCoded={true}
+                    isCoded={image.isCoded}
                 />
                 </div>
             ))}
