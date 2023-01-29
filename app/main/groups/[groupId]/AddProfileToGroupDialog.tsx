@@ -12,7 +12,7 @@ interface AddProfileToGroupDialogProps {
 
 const getUnassignedProfiles = async (groupId: string, apikey: string) => {
   try{
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/not-belong-group/${groupId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/not-in-group/${groupId}`, {
           method: 'GET',
           headers: {
               'Authorization': apikey

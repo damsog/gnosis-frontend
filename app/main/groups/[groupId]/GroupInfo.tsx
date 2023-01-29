@@ -3,6 +3,7 @@
 import { Group } from '@prisma/client'
 import React, { use } from 'react'
 import AddProfileToGroupDialog from './AddProfileToGroupDialog'
+import ProfileList from './ProfileList'
 
 interface GroupInfoProps {
     groupId: string
@@ -37,6 +38,7 @@ export default function GroupInfo( {groupId, apikey} : GroupInfoProps ) {
                 <AddProfileToGroupDialog  apikey={apikey} groupId={groupId} />
                 <div>
                     <hr className="p-2 border-green-700" />
+                    <ProfileList groupId={groupId} apikey={apikey} />
                 </div>
             </div>
         </div>
