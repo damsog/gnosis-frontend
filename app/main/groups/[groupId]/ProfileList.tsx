@@ -33,9 +33,9 @@ function ProfileList({groupId, apikey}: ProfilesProps) {
 
 
     return (
-        <>
+        <div>
             {query.data!.map( (profile) => (
-                <div key={profile.id}>
+                <div key={profile.id} className="my-2">
                 <ProfileOption
                     profileId={profile.id}
                     groupId={groupId}
@@ -46,7 +46,7 @@ function ProfileList({groupId, apikey}: ProfilesProps) {
                 />
                 </div>
             ))}
-        </>
+        </div>
     );
 }
 
