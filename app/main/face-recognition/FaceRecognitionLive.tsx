@@ -4,17 +4,21 @@ import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { AiOutlinePlayCircle } from 'react-icons/ai';
 import { BiStopCircle } from 'react-icons/bi';
-import { FaceProcessingStream } from '../../../../components/FaceProcessingStream'
-import VideoElement from '../../../../components/VideoElement';
+import { FaceProcessingStream } from '../../../components/FaceProcessingStream'
+import VideoElement from '../../../components/VideoElement';
 
-function FaceRecognitionLive(): any {
+interface FaceRecognitionLiveProps {
+    groupId: string;
+}
+
+function FaceRecognitionLive({groupId}: FaceRecognitionLiveProps): any {
     const [videoStream, setVideoStream] = useState<MediaStream>();
     const { data: session, status } = useSession({ required: true });
     const faceRecognitionStream: FaceProcessingStream = new FaceProcessingStream(`${process.env.NEXT_PUBLIC_API_URL}/api`);
 
     const startVideo = async () => {
         console.log('start video' + JSON.stringify(session));
-        const stream:MediaStream = await faceRecognitionStream.start(session?.apikey as string, "cldet3hgu0001mi2r8w86990m");
+        const stream:MediaStream = await faceRecognitionStream.start(session?.apikey as string, groupId);
         setVideoStream(stream);
     };
 

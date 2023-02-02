@@ -1,6 +1,10 @@
 import { FaFileUpload } from 'react-icons/fa';
 
-const FaceRecognitionSnap = () => {
+interface FaceRecognitionSnapProps {
+    groupId: string;
+}
+
+const FaceRecognitionSnap = ({groupId}: FaceRecognitionSnapProps) => {
     return (
     <>
         <div className='flex flex-col'>
