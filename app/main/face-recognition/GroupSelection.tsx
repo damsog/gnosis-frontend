@@ -4,8 +4,8 @@ import { Listbox, Transition } from '@headlessui/react'
 import {AiOutlineCheck, AiOutlineDown } from 'react-icons/ai'
 import { Group } from '@prisma/client'
 import { useQuery } from 'react-query'
-import FaceDetectionSnap from './FaceRecognitionSnap'
-import FaceDetectionLive from './FaceRecognitionLive'
+import FaceRecognitionSnap from './FaceRecognitionSnap'
+import FaceRecognitionLive from './FaceRecognitionLive'
 
 const getCodedGroups = async (userId: string, apikey: string) => {
   try{
@@ -90,8 +90,8 @@ export default function GroupSelection({option, userId, apikey}: GroupSelectionP
       </Listbox>
     </div>
     <div>
-          {option === "live" && <FaceDetectionLive groupId={selected?.dataset ? selected.dataset.split(".")[0] : ""}/>}
-          {option === "snap" && <FaceDetectionSnap groupId={selected?.dataset ? selected.dataset.split(".")[0] : ""}/>}
+          {option === "live" && <FaceRecognitionLive groupId={selected?.dataset ? selected.dataset.split(".")[0] : ""}/>}
+          {option === "snap" && <FaceRecognitionSnap groupId={selected?.dataset ? selected.dataset.split(".")[0] : ""}/>}
     </div>
     </div>
   )
