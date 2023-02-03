@@ -27,7 +27,7 @@ export class ApiFaceProcessingService {
     async postFaceProcessingStreamSDP(data: RtcOfferDataModel, apikey: string, recognitionGroupDataset: string | undefined ): Promise<any> {
         // If the recognitionGroupDataset is defined, then we are doing recognition, otherwise we are doing detection
         const processType:string = recognitionGroupDataset ? "recognition" : "detection";
-        const payload = recognitionGroupDataset ? {...data, recognitionGroupDataset: recognitionGroupDataset} : data;
+        const payload = recognitionGroupDataset ? {...data, groupId: recognitionGroupDataset} : data;
 
         const response = await fetch(`${this.apiUrl}/${processType}/stream`, {
             method: 'POST',

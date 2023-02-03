@@ -17,7 +17,7 @@ function FaceRecognitionLive({groupId}: FaceRecognitionLiveProps): any {
     const faceRecognitionStream: FaceProcessingStream = new FaceProcessingStream(`${process.env.NEXT_PUBLIC_API_URL}/api`);
 
     const startVideo = async () => {
-        console.log('start video' + JSON.stringify(session));
+        console.log('start video' + JSON.stringify(session) + " group "  + groupId);
         const stream:MediaStream = await faceRecognitionStream.start(session?.apikey as string, groupId);
         setVideoStream(stream);
     };
