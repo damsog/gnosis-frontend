@@ -4,8 +4,8 @@ import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { AiOutlinePlayCircle } from 'react-icons/ai';
 import { BiStopCircle } from 'react-icons/bi';
-import { FaceProcessingStream } from '../../../../components/FaceProcessingStream'
-import VideoElement from '../../../../components/VideoElement';
+import { FaceProcessingStream } from '../../../components/FaceProcessingStream'
+import VideoElement from '../../../components/VideoElement';
 
 function FaceDetectionLive(): any {
     const [videoStream, setVideoStream] = useState<MediaStream>();
