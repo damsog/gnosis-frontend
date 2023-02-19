@@ -35,7 +35,8 @@ export default function NewimageDialog({profileId, apikey}:NewImageDialogProps) 
           const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/image?name=${data.name}&profileId=${data.profileId}`, {
               method: "POST",
               headers: {
-                  'Authorization': apikey
+                  "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
               },
               body: form
           });

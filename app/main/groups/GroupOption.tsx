@@ -25,7 +25,8 @@ export default function GroupOption({groupId, name, description, dataset, apikey
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/group/${groupId}`, {
                 method: "DELETE",
                 headers: {
-                    'Authorization': apikey
+                    "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
                 },
             });
             console.log(`Response: ${JSON.stringify(response)}`);

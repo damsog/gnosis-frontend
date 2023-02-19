@@ -32,7 +32,8 @@ export default function NewProfileDialog({userId, apikey}:NewProfileDialogProps)
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    'Authorization': apikey
+                    "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
                 },
                 body: JSON.stringify(data)
             });

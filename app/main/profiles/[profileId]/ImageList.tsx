@@ -17,6 +17,7 @@ const getImages = async (profileId: string, apikey: string) => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/image/profile/${profileId}?base64=true`, {
             method: 'GET',
             headers: {
+                "ngrok-skip-browser-warning": "69420",
                 'Authorization': apikey
             }})
         const images: ImageExt[] = await response.json();

@@ -14,7 +14,8 @@ const getProfile = async (profileId: string, apikey: string) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/${profileId}`, {
         method: 'GET',
         headers: {
-            'Authorization': apikey
+            "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
         }})
     const profile: Profile = await response.json();
     return profile;

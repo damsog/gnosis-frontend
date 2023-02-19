@@ -15,7 +15,8 @@ const getUnassignedProfiles = async (groupId: string, apikey: string) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/not-in-group/${groupId}`, {
           method: 'GET',
           headers: {
-              'Authorization': apikey
+              "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
           }})
       const profiles: Profile[] = await response.json();
       return profiles;
@@ -91,7 +92,8 @@ export default function AddProfileToGroupDialog({groupId, apikey}:AddProfileToGr
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    'Authorization': apikey
+                    "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
                 },
                 body: JSON.stringify(data)
             });

@@ -25,7 +25,8 @@ export default function ProfileOption({profileId, name, description, coded, apik
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/${profileId}`, {
                 method: "DELETE",
                 headers: {
-                    'Authorization': apikey
+                    "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
                 },
             });
             console.log(`Response: ${JSON.stringify(response)}`);

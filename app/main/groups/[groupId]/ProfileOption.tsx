@@ -32,7 +32,8 @@ export default function ProfileOption({profileId, groupId, name, description, co
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    'Authorization': apikey
+                    "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
                 },
                 body: JSON.stringify(data)
             });

@@ -13,6 +13,7 @@ const getProfiles = async (groupId: string, apikey: string) => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/group/${groupId}`, {
             method: 'GET',
             headers: {
+                "ngrok-skip-browser-warning": "69420",
                 'Authorization': apikey
             }})
         const profiles: Profile[] = await response.json();

@@ -13,6 +13,7 @@ const getGroups = async (userId: string, apikey: string) => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/group/user/${userId}`, {
             method: 'GET',
             headers: {
+                "ngrok-skip-browser-warning": "69420",
                 'Authorization': apikey
             }})
         const groups: Group[] = await response.json();

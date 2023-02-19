@@ -40,7 +40,8 @@ export default function ImageOption({imageId, profileId, name, coder, isCoded, i
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    'Authorization': apikey
+                    "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
                 },
                 body: JSON.stringify(encodeImageRequest)
             });
@@ -59,7 +60,8 @@ export default function ImageOption({imageId, profileId, name, coder, isCoded, i
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/image/${imageId}`, {
                 method: "DELETE",
                 headers: {
-                    'Authorization': apikey
+                    "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
                 },
             });
             console.log(`Response: ${JSON.stringify(response)}`);

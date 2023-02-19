@@ -19,7 +19,8 @@ const getGroup = async (groupId: string, apikey: string) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/group/${groupId}`, {
         method: 'GET',
         headers: {
-            'Authorization': apikey
+            "ngrok-skip-browser-warning": "69420",
+                'Authorization': apikey
         }})
     const group: Group = await response.json();
     return group;
@@ -42,6 +43,7 @@ export default function GroupInfo( {groupId, apikey} : GroupInfoProps ) {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/group/dataset/${groupId}`, {
             method: 'GET',
             headers: {
+                "ngrok-skip-browser-warning": "69420",
                 'Authorization': apikey
             }})
         const group: Group = await response.json();
@@ -53,6 +55,7 @@ export default function GroupInfo( {groupId, apikey} : GroupInfoProps ) {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/group/dataset/${groupId}`, {
             method: 'PUT',
             headers: {
+                "ngrok-skip-browser-warning": "69420",
                 'Authorization': apikey
             }})
         const group: Group = await response.json();
